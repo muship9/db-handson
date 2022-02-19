@@ -38,6 +38,10 @@ func run() error {
 		if err := inputRecord(db); err != nil {
 			return err
 		}
+
+		if err := editRecord(db); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -78,7 +82,6 @@ func showRecords(db *sql.DB) error {
 
 func inputRecord(db *sql.DB) error {
 	var r Record
-
 	fmt.Print("Name >")
 	fmt.Scan(&r.Name)
 
@@ -91,5 +94,18 @@ func inputRecord(db *sql.DB) error {
 		return err
 	}
 
+	return nil
+}
+
+func editRecord(db *sql.DB) error {
+	var input string
+	var r Record
+	fmt.Print("change Record? (Y/n)")
+	fmt.Scan(&input)
+
+	if input == "y" {
+		fmt.Print("ID >")
+		fmt.Scan(&r.ID)
+	}
 	return nil
 }
